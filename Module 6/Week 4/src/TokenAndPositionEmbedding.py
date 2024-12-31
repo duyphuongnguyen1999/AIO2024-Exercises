@@ -3,7 +3,7 @@ import torch.nn as nn
 
 
 class TokenAndPositionEmbedding(nn.Module):
-    def __init__(self, vocab_size, embed_dims, max_length, device="cuda"):
+    def __init__(self, vocab_size, embed_dims, max_length, device="cpu"):
         super().__init__()
         self.device = device
         self.word_embed = nn.Embedding(
