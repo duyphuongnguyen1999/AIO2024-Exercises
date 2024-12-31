@@ -75,7 +75,7 @@ class TransformerEncoderCls(nn.Module):
     ):
         super().__init__()
         self.encoder = TransformerEncoder(
-            vocab_size=vocab_size,
+            src_vocab_size=vocab_size,
             embed_dim=embed_dim,
             max_length=max_length,
             num_layers=num_layers,
