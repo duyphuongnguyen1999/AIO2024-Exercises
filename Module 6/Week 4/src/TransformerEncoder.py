@@ -23,7 +23,7 @@ class TransformerEncoder(nn.Module):
         self.layers = nn.ModuleList(
             [
                 TransformerEncoderBlock(embed_dim, num_heads, ff_dim, dropout)
-                for i in range(num_layers)
+                for _ in range(num_layers)
             ]
         )
 
