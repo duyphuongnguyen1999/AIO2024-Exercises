@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from Encoder import TransformerEncoder
 from Decoder import TransformerDecoder
+from config import DEVICE
 
 
 class Transformer(nn.Module):
@@ -15,7 +16,7 @@ class Transformer(nn.Module):
         num_heads,
         ff_dim,
         dropout=0.1,
-        device="cpu",
+        device=DEVICE,
     ):
         super().__init__()
         self.device = device
