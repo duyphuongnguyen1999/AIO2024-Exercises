@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
-from config import SEQ_LENGTH, BATCH_SIZE
+from ..config import SEQ_LENGTH, BATCH_SIZE
 
 # Set default seq_length, batch_size
 seq_length = SEQ_LENGTH
