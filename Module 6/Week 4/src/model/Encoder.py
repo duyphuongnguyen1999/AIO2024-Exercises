@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
+from config import DEVICE
 
 
 class TokenAndPositionEmbedding(nn.Module):
-    def __init__(self, vocab_size, embed_dim, max_length, device="cpu"):
+    def __init__(self, vocab_size, embed_dim, max_length, device=DEVICE):
         super().__init__()
         self.device = device
         self.word_embed = nn.Embedding(
@@ -59,7 +60,7 @@ class TransformerEncoder(nn.Module):
         num_heads,
         ff_dim,
         dropout=0.1,
-        device="cpu",
+        device=DEVICE,
     ):
         super().__init__()
         self.embedding = TokenAndPositionEmbedding(
