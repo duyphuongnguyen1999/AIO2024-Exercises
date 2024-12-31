@@ -3,14 +3,14 @@ import torch.nn as nn
 
 
 class TokenAndPositionEmbedding(nn.Module):
-    def __init__(self, vocab_size, embed_dims, max_length, device="cpu"):
+    def __init__(self, vocab_size, embed_dim, max_length, device="cpu"):
         super().__init__()
         self.device = device
         self.word_embed = nn.Embedding(
-            num_embeddings=vocab_size, embedding_dim=embed_dims
+            num_embeddings=vocab_size, embedding_dim=embed_dim
         )
 
-        self.pos_emb = nn.Embedding(max_length, embed_dims)
+        self.pos_emb = nn.Embedding(max_length, embed_dim)
 
     def forward(self, x):
         N, seq_len = x.size()
