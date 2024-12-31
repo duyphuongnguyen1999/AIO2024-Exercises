@@ -1,5 +1,6 @@
 import torch.nn as nn
 from Encoder import TokenAndPositionEmbedding
+from config import DEVICE
 
 
 class TransformerDecoderBlock(nn.Module):
@@ -50,7 +51,7 @@ class TransformerDecoder(nn.Module):
         num_heads,
         ff_dim,
         dropout=0.1,
-        device="cpu",
+        device=DEVICE,
     ):
         super().__init__()
         self.embedding = TokenAndPositionEmbedding(
