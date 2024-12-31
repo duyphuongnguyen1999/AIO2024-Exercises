@@ -9,6 +9,7 @@ max_length = 100
 num_layers = 2
 num_heads = 4
 ff_dim = 256
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = Transformer(
     src_vocab_size=src_vocab_size,
@@ -18,7 +19,7 @@ model = Transformer(
     num_layers=num_layers,
     num_heads=num_heads,
     ff_dim=ff_dim,
-    device="cpu",
+    device=device,
 )
 src = torch.randint(high=2, size=(batch_size, max_length))
 tgt = torch.randint(high=2, size=(batch_size, max_length))
