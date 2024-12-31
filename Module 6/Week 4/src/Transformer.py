@@ -23,7 +23,7 @@ class Transformer(nn.Module):
             src_vocab_size=src_vocab_size,
             embed_dim=embed_dim,
             max_length=max_length,
-            num_heads=num_layers,
+            num_layers=num_layers,
             num_heads=num_heads,
             ff_dim=ff_dim,
         )
