@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 from Encoder import TransformerEncoder
 from Decoder import TransformerDecoder
-from config import DEVICE
 
 
 class Transformer(nn.Module):
@@ -16,7 +15,7 @@ class Transformer(nn.Module):
         num_heads,
         ff_dim,
         dropout=0.1,
-        device=DEVICE,
+        device="cpu",
     ):
         super().__init__()
         self.device = device
@@ -59,4 +58,43 @@ class Transformer(nn.Module):
         enc_output = self.encoder(src)
         dec_output = self.decoder(tgt, enc_output, src_mask, tgt_mask)
         output = self.fc(dec_output)
+        return output
+
+
+class TransformerEncoderCls(nn.Module):
+    def __init__(
+        self,
+        vocab_size,
+        max_length,
+        num_layers,
+        embed_dim,
+        num_heads,
+        ff_dim,
+        dropout=0.1,
+        device="cpu",
+    ):
+        super().__init__()
+        self.encoder = TransformerEncoder(
+            vocab_size=vocab_size,
+            embed_dim=embed_dim,
+            max_length=max_length,
+            num_layers=num_layers,
+            num_heads=num_heads,
+            ff_dim=ff_dim,
+            dropout=dropout,
+            device=device,
+        )
+        self.pooling = nn.AvgPool1d(kernel_size=max_length)
+        self.fc1 = nn.Linear(in_features=embed_dim, out_features=20)
+        self.fc2 = nn.Linear(in_features=20, out_features=2)
+        self.dropout = nn.Dropout(p=dropout)
+        self.relu = nn.ReLU()
+
+    def forward(self, x):
+        output = self.encoder(x)
+        output = self.pooling(output.permute(0, 2, 1)).squeeze()
+        output = self.dropout(output)
+        output = self.fc1(output)
+        output = self.dropout(output)
+        output = self.fc2(output)
         return output
