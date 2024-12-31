@@ -10,7 +10,7 @@ class TokenAndPositionEmbedding(nn.Module):
             num_embeddings=vocab_size, embedding_dim=embed_dims
         )
 
-        self.pos_emb = nn.Embedding(num_embeddings=max_length, embedding_dim=embed_dims)
+        self.pos_emb = nn.Embedding(max_length, embed_dims)
 
     def forward(self, x):
         N, seq_len = x.size()
